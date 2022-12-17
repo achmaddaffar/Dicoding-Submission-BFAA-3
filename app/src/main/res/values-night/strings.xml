@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GithubApp</string>
+    <string name="githublogo">GithubLogo</string>
+    <string name="user_profile_picture">User Profile Picture</string>
+    <string name="search_user_hint">Search User</string>
+    <string name="username">Username</string>
+    <string name="mainactionbartitle">Github User\'s Search</string>
+    <string name="name">Name</string>
+    <string name="user_bio">User Bio</string>
+    <string name="public_repos">Public Repos</string>
+    <string name="followers">Followers</string>
+    <string name="followings">Followings</string>
+    <string name="_0">0</string>
+    <string name="tab_title_1">Followers</string>
+    <string name="tan_title_2">Following</string>
+    <string name="favorite_user_title">Favorite User</string>
+    <string name="favorite_button">favorite_button</string>
+</resources>
