@@ -37,6 +37,9 @@ class DetailUserViewModel(application: Application) : ViewModel() {
         mFavoriteRepository.isUserFavorite(username)
     }
 
+    private val mProfPicLink = MutableLiveData<String>()
+    val profPicLink: LiveData<String> = mProfPicLink
+
     private val mFollowerList = MutableLiveData<List<UserFollowItem>>()
     val followerList: LiveData<List<UserFollowItem>> = mFollowerList
 
@@ -67,9 +70,6 @@ class DetailUserViewModel(application: Application) : ViewModel() {
     private val mSnackBarText = MutableLiveData<Event<String>>()
     val snackBarText: LiveData<Event<String>> = mSnackBarText
 
-//    private val mIsFavorite = MutableLiveData<Boolean>()
-//    val isFavorite: LiveData<Boolean> = mIsFavorite
-
     private fun showLoading(isLoading: Boolean) {
         mIsLoading.value = isLoading
     }
@@ -85,6 +85,7 @@ class DetailUserViewModel(application: Application) : ViewModel() {
                     if (responseBody != null) {
                         getFollowerList(username)
                         getFollowingList(username)
+                        mProfPicLink.value = responseBody.avatarUrl.toString()
                         mFollowersCount.value = responseBody.followers
                         mFollowingCount.value = responseBody.following
                         mPublicRepos.value = responseBody.publicRepos

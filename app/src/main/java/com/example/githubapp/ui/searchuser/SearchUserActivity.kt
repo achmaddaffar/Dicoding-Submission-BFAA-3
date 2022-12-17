@@ -101,9 +101,9 @@ class SearchUserActivity : AppCompatActivity() {
         val adapter = SearchUserAdapter(userList)
         binding.rvUserlist.adapter = adapter
         adapter.setOnItemClickCallback(object : SearchUserAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: User) {
+            override fun onItemClicked(data: String) {
                 val intent = Intent(this@SearchUserActivity, DetailUserActivity::class.java)
-                intent.putExtra(USER, data)
+                intent.putExtra(USERNAME, data)
                 startActivity(intent)
             }
         })
@@ -129,6 +129,6 @@ class SearchUserActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val USER = "USER"
+        const val USERNAME = "Username"
     }
 }

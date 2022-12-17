@@ -14,7 +14,7 @@ class SearchUserAdapter(private val listUser: List<User>) :
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: User)
+        fun onItemClicked(data: String)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -39,7 +39,7 @@ class SearchUserAdapter(private val listUser: List<User>) :
             .into(holder.binding.ivUserProfilePicture)
 
         holder.itemView.setOnClickListener {
-            onItemClickCallback.onItemClicked(listUser[holder.absoluteAdapterPosition])
+            onItemClickCallback.onItemClicked(listUser[holder.absoluteAdapterPosition].login.toString())
         }
     }
 

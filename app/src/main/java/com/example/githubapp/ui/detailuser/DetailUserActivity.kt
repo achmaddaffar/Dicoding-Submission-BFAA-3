@@ -1,7 +1,6 @@
 package com.example.githubapp.ui.detailuser
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -16,7 +15,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.githubapp.R
 import com.example.githubapp.data.local.entity.Favorite
-import com.example.githubapp.data.remote.response.User
 import com.example.githubapp.databinding.ActivityDetailUserBinding
 import com.example.githubapp.ui.searchuser.SearchUserActivity
 import com.example.githubapp.ui.settings.SettingPreferences
@@ -46,16 +44,17 @@ class DetailUserActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-        val item = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra(SearchUserActivity.USER, User::class.java)
-        } else {
-            intent.getParcelableExtra<User>(SearchUserActivity.USER)
-        }
-        val username = item?.login.toString()
-        supportActionBar?.title = username
+        val item = intent.getStringExtra(SearchUserActivity.USERNAME) as String
+        supportActionBar?.title = item
 
         viewModel.apply {
-            getUserDetail(username)
+            getUserDetail(item)
+            profPicLink.observe(this@DetailUserActivity) {
+                Glide.with(this@DetailUserActivity)
+                    .load(it)
+                    .error(R.drawable.githublogo)
+                    .into(binding.ivUserProfilePicture)
+            }
             name.observe(this@DetailUserActivity) {
                 binding.tvName.text = it
             }
@@ -96,25 +95,20 @@ class DetailUserActivity : AppCompatActivity() {
                         .show()
                 }
             }
-            setFavoriteDrawable(isUserFavorite(username))
+            setFavoriteDrawable(isUserFavorite(item))
         }
 
         binding.apply {
-            Glide.with(this@DetailUserActivity)
-                .load(item?.avatarUrl)
-                .into(ivUserProfilePicture)
-            tvUsername.text = username
-
             fabFavorite.setOnClickListener {
-                if (viewModel.isUserFavorite(username)) {
-                    viewModel.delete(username)
+                if (viewModel.isUserFavorite(item)) {
+                    viewModel.delete(item)
                     setFavoriteDrawable(false)
                     Toast.makeText(this@DetailUserActivity, DELETE_FAV, Toast.LENGTH_SHORT).show()
                 } else {
                     val favorite = Favorite()
                     favorite.let {
-                        it.username = username
-                        it.profile_picture = item?.avatarUrl
+                        it.username = item
+                        it.profile_picture = viewModel.profPicLink.value.toString()
                     }
                     viewModel.insert(favorite)
                     setFavoriteDrawable(true)

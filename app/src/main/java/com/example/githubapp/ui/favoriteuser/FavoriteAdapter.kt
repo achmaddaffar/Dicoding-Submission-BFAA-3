@@ -14,7 +14,16 @@ class FavoriteAdapter :
     class ViewHolder(var binding: ItemRowUserBinding) :
         RecyclerView.ViewHolder(binding.root)
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
     private val favoriteList = ArrayList<Favorite>()
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: String)
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     fun setFavoriteList(favoriteList: List<Favorite>) {
         val diffCallback = FavoriteDiffCallback(this.favoriteList, favoriteList)
@@ -37,6 +46,10 @@ class FavoriteAdapter :
             .error(R.drawable.githublogo)
             .circleCrop()
             .into(holder.binding.ivUserProfilePicture)
+
+        holder.itemView.setOnClickListener {
+            onItemClickCallback.onItemClicked(favoriteList[holder.absoluteAdapterPosition].username)
+        }
     }
 
     override fun getItemCount(): Int {
