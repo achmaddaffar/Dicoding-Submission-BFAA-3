@@ -2,7 +2,6 @@ package com.example.githubapp.ui.favoriteuser
 
 import android.content.Context
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -34,8 +33,6 @@ class FavoriteUserActivity : AppCompatActivity() {
             if (favoriteList != null) {
                 adapter.setFavoriteList(favoriteList)
             }
-            Toast.makeText(this, "list: ${favoriteList.isEmpty()}".toString(), Toast.LENGTH_SHORT)
-                .show()
         }
 
 

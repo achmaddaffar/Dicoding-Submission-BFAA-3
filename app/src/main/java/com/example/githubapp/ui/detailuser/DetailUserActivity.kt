@@ -84,7 +84,7 @@ class DetailUserActivity : AppCompatActivity() {
                         .setBackgroundTint(
                             ContextCompat.getColor(
                                 this@DetailUserActivity,
-                                R.color.github_black
+                                R.color.github_orange
                             )
                         )
                         .setTextColor(
@@ -109,7 +109,7 @@ class DetailUserActivity : AppCompatActivity() {
                 if (viewModel.isUserFavorite(username)) {
                     viewModel.delete(username)
                     setFavoriteDrawable(false)
-                    Toast.makeText(this@DetailUserActivity, "DELETE",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DetailUserActivity, DELETE_FAV, Toast.LENGTH_SHORT).show()
                 } else {
                     val favorite = Favorite()
                     favorite.let {
@@ -118,7 +118,7 @@ class DetailUserActivity : AppCompatActivity() {
                     }
                     viewModel.insert(favorite)
                     setFavoriteDrawable(true)
-                    Toast.makeText(this@DetailUserActivity, "INSERT",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DetailUserActivity, ADD_FAV, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -163,5 +163,8 @@ class DetailUserActivity : AppCompatActivity() {
             R.string.tab_title_1,
             R.string.tan_title_2
         )
+
+        private const val ADD_FAV = "Sukses menambahkan ke Favorit"
+        private const val DELETE_FAV = "Sukses menghapus dari Favorit"
     }
 }

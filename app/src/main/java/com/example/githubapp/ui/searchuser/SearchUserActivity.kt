@@ -56,7 +56,10 @@ class SearchUserActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(s: String): Boolean {
-                viewModel.getUserList(s)
+                viewModel.apply {
+                    clearUserList()
+                    getUserList(s)
+                }
                 searchView.clearFocus()
                 return true
             }
@@ -76,7 +79,7 @@ class SearchUserActivity : AppCompatActivity() {
                     .setBackgroundTint(
                         ContextCompat.getColor(
                             this,
-                            R.color.github_black
+                            R.color.github_orange
                         )
                     )
                     .setTextColor(
@@ -112,7 +115,7 @@ class SearchUserActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.action_favorite -> {
                 val intent = Intent(this@SearchUserActivity, FavoriteUserActivity::class.java)
                 startActivity(intent)
@@ -126,7 +129,6 @@ class SearchUserActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TAG = "SearchUserActivity"
         const val USER = "USER"
     }
 }

@@ -24,7 +24,7 @@ class ViewModelFactory private constructor(
         } else if (modelClass.isAssignableFrom(SettingsViewModel::class.java)) {
             return SettingsViewModel(pref) as T
         } else if (modelClass.isAssignableFrom(SplashViewModel::class.java)) {
-            return SplashViewModel() as T
+            return SplashViewModel(pref) as T
         }
         throw IllegalArgumentException("Unknown ViewModel Class: ${modelClass.name}")
     }

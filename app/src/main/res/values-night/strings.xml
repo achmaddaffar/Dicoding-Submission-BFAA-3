@@ -16,4 +16,7 @@
     <string name="tan_title_2">Following</string>
     <string name="favorite_user_title">Favorite User</string>
     <string name="favorite_button">favorite_button</string>
+    <string name="favorite">Favorite</string>
+    <string name="settings">Settings</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

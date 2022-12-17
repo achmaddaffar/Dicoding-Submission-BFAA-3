@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubapp.utils.Event
-import com.example.githubapp.data.remote.retrofit.ApiConfig
 import com.example.githubapp.data.remote.response.User
 import com.example.githubapp.data.remote.response.UsersResponse
+import com.example.githubapp.data.remote.retrofit.ApiConfig
+import com.example.githubapp.utils.Event
 import retrofit2.Call
 import retrofit2.Response
 
@@ -50,6 +50,10 @@ class SearchUserViewModel : ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })
+    }
+
+    fun clearUserList() {
+        mUserList.value = emptyList()
     }
 
     private fun showLoading(isLoading: Boolean) {
