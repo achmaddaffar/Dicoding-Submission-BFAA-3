@@ -45,7 +45,10 @@ class DetailUserActivity : AppCompatActivity() {
         }.attach()
 
         val item = intent.getStringExtra(SearchUserActivity.USERNAME) as String
-        supportActionBar?.title = item
+        supportActionBar?.apply {
+            title = item
+            setDisplayHomeAsUpEnabled(true)
+        }
 
         viewModel.apply {
             getUserDetail(item)
@@ -57,6 +60,9 @@ class DetailUserActivity : AppCompatActivity() {
             }
             name.observe(this@DetailUserActivity) {
                 binding.tvName.text = it
+            }
+            username.observe(this@DetailUserActivity) {
+                binding.tvUsername.text = it
             }
             bio.observe(this@DetailUserActivity) {
                 binding.tvBio.text = it
@@ -116,6 +122,11 @@ class DetailUserActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     private fun setFavoriteDrawable(isUserFavorite: Boolean) {

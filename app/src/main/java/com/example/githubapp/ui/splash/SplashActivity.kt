@@ -55,7 +55,7 @@ class SplashActivity : AppCompatActivity() {
                 binding.root.setBackgroundColor(
                     ContextCompat.getColor(
                         binding.root.context,
-                        R.color.github_white
+                        R.color.white
                     )
                 )
                 binding.ivSplashlogo.setImageDrawable(
